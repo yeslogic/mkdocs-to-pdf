@@ -171,6 +171,8 @@ class Generator(object):
         if self._options.relaxed_js:
             self._options.relaxed_js.write_pdf(
                 html_string, abs_pdf_path)
+        elif self._options.prince:
+            self._options.prince.write_pdf(html_string, abs_pdf_path)
         else:
             html = HTML(string=html_string)
             render = html.render()

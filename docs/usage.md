@@ -220,6 +220,47 @@ INFO    -  Converting 10 articles to PDF took 7.1s
 INFO    -  Documentation built in 8.29 seconds
 ```
 
+### PDF Engine
+
+#### `engine`
+
+The program that renders the PDF: `weasyprint` or `prince`.
+
+[Prince](https://www.princexml.com/) is installed with the `prince` extra,
+which pulls in the [`prince-pdf`](https://pypi.org/project/prince-pdf/)
+package; it bundles the Prince engine, so no separate installation is
+needed:
+
+```console
+$ pip install "mkdocs-to-pdf[prince]"
+```
+
+Prince is free for non-commercial use, with a small notice on the first
+page; see [princexml.com](https://www.princexml.com/purchase/) for licenses.
+
+Default is `weasyprint`.
+
+``` yaml
+plugins:
+  - to-pdf:
+      engine: prince
+```
+
+#### `prince_path`
+
+Path to a separately installed `prince` executable, to use instead of the
+one bundled with `prince-pdf`. Ignored unless `engine` is `prince`.
+
+Default is `""` (use the bundled engine, or the one the `PRINCE_PATH`
+environment variable points to).
+
+``` yaml
+plugins:
+  - to-pdf:
+      engine: prince
+      prince_path: /usr/local/bin/prince
+```
+
 ### Debug
 
 #### `verbose`

@@ -38,6 +38,9 @@ classifiers = [
 ]
 
 [project.optional-dependencies]
+prince = [
+    "prince-pdf >= 17",
+]
 dev = [
     "pre-commit == 4.6.0",
 ]

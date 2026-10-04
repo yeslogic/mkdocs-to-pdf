@@ -4,6 +4,7 @@ from mkdocs.config import config_options
 
 from .drivers.event_hook import EventHookHandler
 from .drivers.headless_chrome import HeadlessChromeDriver
+from .drivers.prince import PrinceRenderer
 from .drivers.relaxedjs import RelaxedJSRenderer
 from .templates.template import Template
 
@@ -47,6 +48,10 @@ class Options(object):
             config_options.Type(str, default='chromium-browser')),
         ('relaxedjs_path',
             config_options.Type(str, default=None)),
+
+        ('engine', config_options.Choice(
+            ('weasyprint', 'prince'), default='weasyprint')),
+        ('prince_path', config_options.Type(str, default=None)),
     )
 
     def __init__(self, local_config, config, logger: logging):
@@ -100,6 +105,9 @@ class Options(object):
 
         self.relaxed_js = RelaxedJSRenderer.setup(
             local_config['relaxedjs_path'], logger)
+
+        self.prince = PrinceRenderer.setup(
+            local_config['engine'], local_config['prince_path'], logger)
 
         # Theming
         self.theme_name = config['theme'].name
